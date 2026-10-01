@@ -1,0 +1,134 @@
+{
+  "name": "Telegram Chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "dd5cf07e-d14c-45a8-957e-dc288f509730",
+      "name": "Telegram Trigger",
+      "webhookId": "ae1399e7-f562-4a9c-b149-fe6b3cca2d10",
+      "credentials": {
+        "telegramApi": {
+          "id": "GifjUNTeezN9uAju",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "472128d3-b5db-4c32-9ef4-0f6765dd749f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen3.8-27b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        96,
+        208
+      ],
+      "id": "f0021e61-dc5a-46e8-a187-ee91f1487804",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "hVRyWblR0K4NwYIw",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "adac8d70-9065-4fab-8153-b8ef8c48dae9",
+      "name": "Send a text message",
+      "webhookId": "af7990b1-9bf1-42ce-b7dc-353bb3d88cf5",
+      "credentials": {
+        "telegramApi": {
+          "id": "GifjUNTeezN9uAju",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6414157e-db72-4031-b7f1-7c21e9a20de5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "317166cb5a5ce407fb01d2551fed097725cc98bd8d9b1778b3ec9169e7c5b166"
+  },
+  "nodeGroups": [],
+  "id": "AUGNgZbODHo7EzDk",
+  "tags": []
+}
