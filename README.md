@@ -9,7 +9,7 @@ An automated Telegram chatbot built using n8n, powered by Groq's Qwen model via 
 ## **Workflow Preview**
 
 <p align="center">
-  <img src="./images/workflow-screenshot.ipeg" alt="n8n Workflow Screenshot" width="800">
+  <img src="./images/workflow-screenshot.jpeg" alt="n8n Workflow Screenshot" width="800">
 </p>
 
 ## Tech Stack
@@ -56,3 +56,11 @@ telegram-ai-chatbot/
 └── images/
     └── workflow-screenshot.png
 ```
+##  Author
+
+**Hithursan Navaretnarasa**
+
+---
+<div align="center" font-wight=800>
+Crafted with ❤️ for the modern connoisseu#
+</div>
